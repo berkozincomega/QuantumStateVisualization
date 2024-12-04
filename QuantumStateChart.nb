@@ -1,0 +1,457 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16415,        449]
+NotebookOptionsPosition[     15831,        431]
+NotebookOutlinePosition[     16232,        447]
+CellTagsIndexPosition[     16189,        444]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Representing", " ", "the", " ", "quantum", " ", "states"}], "|", 
+    RowBox[{"R_up", ">", "and"}], "|", 
+    RowBox[{"L_dn", ">"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Rup", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"|", 
+     RowBox[{"R_up", ">", "state"}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"Ldn", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}], ";"}], " ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"|", 
+     RowBox[{"L_dn", ">", "state"}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Define", " ", "\[Alpha]", " ", "and", " ", "\[Beta]", " ", "as", " ", 
+     "symbolic", " ", "variables"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Alpha]", "=", 
+     RowBox[{"Symbol", "[", "\"\<\[Alpha]\>\"", "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"\[Beta]", "=", 
+     RowBox[{"-", "\[Alpha]"}]}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Since", " ", "\[Beta]"}], "=", 
+     RowBox[{
+      RowBox[{"-", "\[Alpha]"}], " ", "as", " ", "per", " ", "your", " ", 
+      "definition"}]}], "*)"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Normalization", " ", 
+      RowBox[{"condition", ":", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Abs", "[", "\[Alpha]", "]"}], "^", "2"}], "+", 
+        RowBox[{
+         RowBox[{"Abs", "[", "\[Beta]", "]"}], "^", "2"}]}]}]}], "=", "1"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NormalizeCondition", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", "\[Alpha]", "]"}], "^", "2"}], "+", 
+       RowBox[{
+        RowBox[{"Abs", "[", "\[Beta]", "]"}], "^", "2"}]}], "==", "1"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Solve", " ", "for", " ", "\[Alpha]", " ", "under", " ", "the", " ", 
+     "normalization", " ", "condition"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"solutions", "=", 
+     RowBox[{"Solve", "[", 
+      RowBox[{"NormalizeCondition", ",", "\[Alpha]", ",", "Reals"}], "]"}]}], 
+    ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Choose", " ", "the", " ", "first", " ", "solution", " ", "for", " ", 
+      "\[Alpha]", " ", "and", " ", "calculate", " ", "\[Beta]"}], "=", 
+     RowBox[{"-", "\[Alpha]"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Alpha]Norm", "=", 
+     RowBox[{"\[Alpha]", "/.", " ", 
+      RowBox[{"solutions", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"\[Beta]Norm", "=", 
+     RowBox[{"-", "\[Alpha]Norm"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Define", " ", "the", " ", "final", " ", "quantum", " ", "state", " ", 
+     "function", " ", 
+     RowBox[{"psi", "[", "f", "]"}], " ", "with", " ", "normalized", " ", 
+     "\[Alpha]", " ", "and", " ", "\[Beta]"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"psi", "[", "f_", "]"}], ":=", 
+     RowBox[{
+      RowBox[{"\[Alpha]Norm", "*", "Rup"}], "-", 
+      RowBox[{"\[Beta]Norm", "*", "Ldn"}]}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Probabilities", " ", "for", " ", "measuring"}], "|", 
+     RowBox[{"R_up", ">", "and"}], "|", 
+     RowBox[{"L_dn", ">", "states"}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"probUp", "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{
+        RowBox[{"psi", "[", "f", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}], "^", "2"}]}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Probability", " ", "of"}], "|", 
+     RowBox[{"R_up", ">"}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"probDn", "=", 
+     RowBox[{
+      RowBox[{"Abs", "[", 
+       RowBox[{
+        RowBox[{"psi", "[", "f", "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "]"}], "^", "2"}]}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Probability", " ", "of"}], "|", 
+     RowBox[{"L_dn", ">"}]}], "*)"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Plotting", " ", "the", " ", "probabilities", " ", "with", " ", "a", " ", 
+     "bar", " ", "chart"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"BarChart", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"probUp", ",", "probDn"}], "}"}], ",", 
+     RowBox[{"ChartLabels", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<|Rup\:27e9\>\"", ",", "\"\<|Ldn\:27e9\>\""}], "}"}]}], 
+     ",", 
+     RowBox[{"ChartStyle", "->", "\"\<Pastel\>\""}], ",", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<State\>\"", ",", "\"\<Probability\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotLabel", "->", "\"\<Probabilities of Quantum States\>\""}]}],
+     "]"}], "\n"}]}]], "Input",
+ CellChangeTimes->{{3.942338498002736*^9, 3.942338503518033*^9}, {
+  3.942338977273765*^9, 3.9423389985318937`*^9}, {3.9423400180293074`*^9, 
+  3.942340027075409*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"263ec124-ad1b-46a4-99d5-5577fbefea6a"],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Opacity[0], 
+    PointBox[{{-0.8428550619082302, 0.}, {3.8048069919883467`, 0.}}]}, {{}, 
+    {RGBColor[0.982864, 0.7431472, 0.3262672], EdgeForm[{Opacity[
+     0.6859999999999999], Thickness[Small]}], 
+     {RGBColor[0.761959, 0.470832, 0.940597], EdgeForm[{Opacity[
+      0.6859999999999999], Thickness[Small]}], 
+      TagBox[
+       TooltipBox[
+        TagBox[
+         TagBox[
+          DynamicBox[{
+            FEPrivate`If[
+             CurrentValue["MouseOver"], 
+             EdgeForm[{
+               GrayLevel[0.5], 
+               AbsoluteThickness[1.5], 
+               Opacity[0.66]}], {}, {}], 
+            
+            RectangleBox[{0.5487982520029133, 0.}, {1.4512017479970867`, 0.5},
+              "RoundingRadius" -> 0]},
+           
+           ImageSizeCache->{{120.46225437780375`, 
+            184.09924221746996`}, {-86.87074634803169, 111.07812499999999`}}],
+          "DelayedMouseEffectStyle"],
+         StatusArea[#, 
+          Rational[1, 2]]& ,
+         TagBoxNote->"1/2"],
+        StyleBox[
+         FractionBox["1", "2"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Rational[1, 2], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.431296, 0.709773, 0.927077], EdgeForm[{Opacity[
+      0.6859999999999999], Thickness[Small]}], 
+      TagBox[
+       TooltipBox[
+        TagBox[
+         TagBox[
+          DynamicBox[{
+            FEPrivate`If[
+             CurrentValue["MouseOver"], 
+             EdgeForm[{
+               GrayLevel[0.5], 
+               AbsoluteThickness[1.5], 
+               Opacity[0.66]}], {}, {}], 
+            
+            RectangleBox[{1.5487982520029133`, 0.}, {2.4512017479970867`, 
+             0.5}, "RoundingRadius" -> 0]},
+           
+           ImageSizeCache->{{190.42761701207468`, 
+            254.0646048517409}, {-86.87074634803169, 111.07812499999999`}}],
+          "DelayedMouseEffectStyle"],
+         StatusArea[#, 
+          Rational[1, 2]]& ,
+         TagBoxNote->"1/2"],
+        StyleBox[
+         FractionBox["1", "2"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Rational[1, 2], {}], "Tooltip"]& ]}}, {}, {}}, {}, {}, {}, {}, 
+   StyleBox[
+    StyleBox[{
+      {Thickness[Tiny], 
+       LineBox[{{-0.8428550619082302, 0.}, {3.870688128186453, 0.}}], 
+       StyleBox[
+        {Thickness[Tiny], InsetBox[
+          TagBox["\<\"State\"\>",
+           HoldForm], Offset[{10., 0.}, {2.4512017479970867, 0.}], NCache[
+          ImageScaled[{0, Rational[1, 2]}], ImageScaled[{0, 0.5}]], 
+          Automatic, {1, 0}]}, "GraphicsLabel",
+        StripOnInput->False]}, 
+      StyleBox[{
+        {Thickness[Tiny], 
+         LineBox[{{0.5487982520029133, 0.}, 
+           Offset[{-1.102182119232618*^-15, -6.}, {0.5487982520029133, 0.}]}],
+          LineBox[{{2.4512017479970867`, 0.}, 
+           Offset[{-1.102182119232618*^-15, -6.}, {2.4512017479970867`, 
+            0.}]}], {{}, {}, {
+           LineBox[{{1.4512017479970867`, 0.}, 
+             Offset[{-7.347880794884119*^-16, -4.}, {1.4512017479970867`, 
+              0.}]}], LineBox[{{1.5487982520029133`, 0.}, 
+             Offset[{-7.347880794884119*^-16, -4.}, {1.5487982520029133`, 
+              0.}]}]}, {}}}, 
+        StyleBox[
+         {Thickness[Tiny], 
+          InsetBox["\<\"|Rup\:27e9\"\>", Offset[{0, -2}, {1., 0.}], NCache[
+           ImageScaled[{Rational[1, 2], 1}], ImageScaled[{0.5, 1}]], 
+           Automatic, {1, 0}], 
+          InsetBox["\<\"|Ldn\:27e9\"\>", Offset[{0, -2}, {2., 0.}], NCache[
+           ImageScaled[{Rational[1, 2], 1}], ImageScaled[{0.5, 1}]], 
+           Automatic, {1, 0}]}, "GraphicsLabel",
+         StripOnInput->False]}, "GraphicsTicks",
+       StripOnInput->False]},
+     Antialiasing->False], "GraphicsAxes",
+    StripOnInput->False]},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{False, True},
+  AxesLabel->{
+    FormBox[
+     TagBox["\"State\"", HoldForm], TraditionalForm], 
+    FormBox[
+     TagBox["\"Probability\"", HoldForm], TraditionalForm]},
+  AxesOrigin->{-0.8428550619082302, 0.},
+  CoordinatesToolOptions:>{"DisplayFunction" -> ({
+      Identity[
+       Part[#, 1]], 
+      Identity[
+       Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+      Identity[
+       Part[#, 1]], 
+      Identity[
+       Part[#, 2]]}& )},
+  DisplayFunction->Identity,
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  PlotLabel->FormBox["\"Probabilities of Quantum States\"", TraditionalForm],
+  PlotRange->{{All, All}, {All, All}},
+  PlotRangePadding->{{
+     Scaled[0.02], 
+     Scaled[0.02]}, {
+     Scaled[0.02], 
+     Scaled[0.05]}},
+  Ticks->{None, Automatic}]], "Output",
+ CellChangeTimes->{
+  3.942339043937151*^9, 3.942339095987068*^9, {3.9423400200633187`*^9, 
+   3.942340028115709*^9}},
+ CellLabel->"Out[24]=",ExpressionUUID->"c44bcd89-9ec9-40de-a72a-a0f5d7d93d41"]
+}, Open  ]],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {Opacity[0], 
+    PointBox[{{-0.8428550619082302, 0.}, {3.8048069919883467`, 0.}}]}, {{}, 
+    {RGBColor[0.982864, 0.7431472, 0.3262672], EdgeForm[{Opacity[
+     0.6859999999999999], Thickness[Small]}], 
+     {RGBColor[0.761959, 0.470832, 0.940597], EdgeForm[{Opacity[
+      0.6859999999999999], Thickness[Small]}], 
+      TagBox[
+       TooltipBox[
+        TagBox[
+         TagBox[
+          DynamicBox[{
+            FEPrivate`If[
+             CurrentValue["MouseOver"], 
+             EdgeForm[{
+               GrayLevel[0.5], 
+               AbsoluteThickness[1.5], 
+               Opacity[0.66]}], {}, {}], 
+            
+            RectangleBox[{0.5487982520029133, 0.}, {1.4512017479970867`, 0.5},
+              "RoundingRadius" -> 0]},
+           
+           ImageSizeCache->{{120.46225451368656`, 
+            184.09924231749957`}, {-86.8707465205508, 111.07812471535684`}}],
+          "DelayedMouseEffectStyle"],
+         StatusArea[#, 
+          Rational[1, 2]]& ,
+         TagBoxNote->"1/2"],
+        StyleBox[
+         FractionBox["1", "2"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Rational[1, 2], {}], "Tooltip"]& ]}, 
+     {RGBColor[0.431296, 0.709773, 0.927077], EdgeForm[{Opacity[
+      0.6859999999999999], Thickness[Small]}], 
+      TagBox[
+       TooltipBox[
+        TagBox[
+         TagBox[
+          DynamicBox[{
+            FEPrivate`If[
+             CurrentValue["MouseOver"], 
+             EdgeForm[{
+               GrayLevel[0.5], 
+               AbsoluteThickness[1.5], 
+               Opacity[0.66]}], {}, {}], 
+            
+            RectangleBox[{1.5487982520029133`, 0.}, {2.4512017479970867`, 
+             0.5}, "RoundingRadius" -> 0]},
+           
+           ImageSizeCache->{{190.4276171082267, 
+            254.06460491203973`}, {-86.8707465205508, 111.07812471535684`}}],
+          "DelayedMouseEffectStyle"],
+         StatusArea[#, 
+          Rational[1, 2]]& ,
+         TagBoxNote->"1/2"],
+        StyleBox[
+         FractionBox["1", "2"], {}, StripOnInput -> False]],
+       Annotation[#, 
+        Style[
+         Rational[1, 2], {}], "Tooltip"]& ]}}, {}, {}}, {}, {}, {}, {}, 
+   StyleBox[{
+     {Thickness[Tiny], 
+      LineBox[{{-0.8428550619082302, 0.}, {3.870688128186453, 0.}}], 
+      StyleBox[
+       {Thickness[Tiny], InsetBox[
+         TagBox["\<\"State\"\>",
+          HoldForm], 
+         Offset[{10., 0.}, {3.3516473065385957, 0.01519380678766069}], NCache[
+         ImageScaled[{0, Rational[1, 2]}], 
+          ImageScaled[{
+           0, 0.5}]], {0.569561949289835, 0.028290551700982085}, {{1., 0.}, {
+         0., 1.}}]}, "GraphicsLabel",
+       StripOnInput->False]}, 
+     StyleBox[{
+       {Thickness[Tiny], 
+        LineBox[{{0.5487982520029133, 0.}, 
+          Offset[{-1.102182119232618*^-15, -6.}, {0.5487982520029133, 0.}]}], 
+        LineBox[{{2.4512017479970867`, 0.}, 
+          Offset[{-1.102182119232618*^-15, -6.}, {2.4512017479970867`, 
+           0.}]}], {{}, {}, {
+          LineBox[{{1.4512017479970867`, 0.}, 
+            Offset[{-7.347880794884119*^-16, -4.}, {1.4512017479970867`, 
+             0.}]}], LineBox[{{1.5487982520029133`, 0.}, 
+            Offset[{-7.347880794884119*^-16, -4.}, {1.5487982520029133`, 
+             0.}]}]}, {}}}, 
+       StyleBox[
+        {Thickness[Tiny], 
+         InsetBox["\<\"|Rup\:27e9\"\>", Offset[{0, -2}, {1., 0.}], NCache[
+          ImageScaled[{Rational[1, 2], 1}], ImageScaled[{0.5, 1}]], 
+          Automatic, {1, 0}], 
+         InsetBox["\<\"|Ldn\:27e9\"\>", Offset[{0, -2}, {2., 0.}], NCache[
+          ImageScaled[{Rational[1, 2], 1}], ImageScaled[{0.5, 1}]], 
+          Automatic, {1, 0}]}, "GraphicsLabel",
+        StripOnInput->False]}, "GraphicsTicks",
+      StripOnInput->False]}, "GraphicsAxes",
+    StripOnInput->False,
+    Antialiasing->False]},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{False, True},
+  AxesLabel->{
+    FormBox[
+     TagBox["\"State\"", HoldForm], TraditionalForm], 
+    FormBox[
+     TagBox["\"Probability\"", HoldForm], TraditionalForm]},
+  AxesOrigin->{-0.8428550619082302, 0.},
+  CoordinatesToolOptions:>{"DisplayFunction" -> ({
+      Identity[
+       Part[#, 1]], 
+      Identity[
+       Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+      Identity[
+       Part[#, 1]], 
+      Identity[
+       Part[#, 2]]}& )},
+  DisplayFunction->Identity,
+  FrameLabel->{{None, None}, {None, None}},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->{{16.47421, 0.}, {8.925663, 17.171875}},
+  PlotLabel->FormBox["\"Probabilities of Quantum States\"", TraditionalForm],
+  PlotRange->{{-0.9410538783685362, 
+   3.968886944646759}, {-0.010752688172043013`, 0.5268817204301075}},
+  PlotRangePadding->Automatic,
+  Ticks->{None, Automatic}]], "Input",
+ CellChangeTimes->{{3.9423390216511774`*^9, 
+  3.942339038928011*^9}},ExpressionUUID->"6fff7c1b-98fe-4bda-871c-\
+977a93a27bc1"]
+},
+WindowSize->{1428, 741.75},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (April 11, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"d5e8cf34-e017-461b-afd1-eb000789da7b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 5221, 141, 547, "Input",ExpressionUUID->"263ec124-ad1b-46a4-99d5-5577fbefea6a"],
+Cell[5804, 165, 4991, 131, 268, "Output",ExpressionUUID->"c44bcd89-9ec9-40de-a72a-a0f5d7d93d41"]
+}, Open  ]],
+Cell[10810, 299, 5017, 130, 264, "Input",ExpressionUUID->"6fff7c1b-98fe-4bda-871c-977a93a27bc1"]
+}
+]
+*)
+
