@@ -19,7 +19,7 @@ solutions = Solve[NormalizeCondition, \[Alpha], Reals];
 
 (*Define the final quantum state function psi[f] with normalized \
 \[Alpha] and \[Beta]*)
-psi[f_] := \[Alpha]Norm*Rup - \[Beta]Norm*Ldn;
+psi[f_] := \[Alpha]Norm*Rup + \[Beta]Norm*Ldn;
 
 (*Probabilities for measuring|R_up>and|L_dn>states*)
 probUp = Abs[psi[f][[1]]]^2; (*Probability of|R_up>*)
