@@ -4,7 +4,7 @@ Ldn = {0, 1}; (* |L_dn>state*)
 
 (*Define \[Alpha] and \[Beta] as symbolic variables*)
 \[Alpha] = Symbol["\[Alpha]"];
-\[Beta] = -\[Alpha]; (*Since \[Beta]=-\[Alpha] as per your definition*)
+\[Beta] = -\[Alpha]; 
 
 (*Normalization condition:Abs[\[Alpha]]^2+Abs[\[Beta]]^2=1*)
 NormalizeCondition = Abs[\[Alpha]]^2 + Abs[\[Beta]]^2 == 1;
